@@ -26,18 +26,18 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `taelab`.`asset`
+-- Table `taelab`.`stock`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `taelab`.`asset` (
-  `assetId` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `taelab`.`stock` (
+  `stocktId` INT NOT NULL,
   `symbol` VARCHAR(45) NOT NULL,
-  `assetName` VARCHAR(45) NOT NULL,
+  `company` VARCHAR(45) NOT NULL,
   `exchange` VARCHAR(45) NOT NULL,
   `country` VARCHAR(45) NOT NULL,
   `currency` VARCHAR(45) NOT NULL,
   `sector` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`assetId`),
-  UNIQUE INDEX `assetId_UNIQUE` (`assetId` ASC) VISIBLE,
+  PRIMARY KEY (`stocktId`),
+  UNIQUE INDEX `assetId_UNIQUE` (`stocktId` ASC) VISIBLE,
   UNIQUE INDEX `symbol_UNIQUE` (`symbol` ASC) VISIBLE)
 ENGINE = InnoDB;
 
@@ -47,11 +47,11 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `taelab`.`watchlist` (
   `watchlistId` VARCHAR(45) NOT NULL,
-  `assetId` INT NOT NULL,
+  `stockId` INT NOT NULL,
   `userId` VARCHAR(45) NOT NULL,
   `category` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`watchlistId`),
-  INDEX `fk_user_has_asset_asset1_idx` (`assetId` ASC) VISIBLE,
+  INDEX `fk_user_has_asset_asset1_idx` (`stockId` ASC) VISIBLE,
   INDEX `fk_user_has_asset_user_idx` (`userId` ASC) VISIBLE,
   CONSTRAINT `fk_user_has_asset_user`
     FOREIGN KEY (`userId`)
@@ -59,8 +59,8 @@ CREATE TABLE IF NOT EXISTS `taelab`.`watchlist` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_user_has_asset_asset1`
-    FOREIGN KEY (`assetId`)
-    REFERENCES `taelab`.`asset` (`assetId`)
+    FOREIGN KEY (`stockId`)
+    REFERENCES `taelab`.`stock` (`stocktId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
