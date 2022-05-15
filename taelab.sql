@@ -74,6 +74,7 @@ CREATE TABLE IF NOT EXISTS `taelab`.`news` (
   `title` VARCHAR(45) NOT NULL,
   `subtitle` VARCHAR(45) NULL,
   `content` VARCHAR(45) NULL,
+  `region` VARCHAR(45) NOT NULL,
   `regdate` TIMESTAMP NULL DEFAULT now(),
   PRIMARY KEY (`newsId`))
 ENGINE = InnoDB;
