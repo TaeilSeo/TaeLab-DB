@@ -29,15 +29,15 @@ ENGINE = InnoDB;
 -- Table `taelab`.`stock`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `taelab`.`stock` (
-  `stocktId` INT NOT NULL,
+  `stockId` INT NOT NULL,
   `symbol` VARCHAR(45) NOT NULL,
   `company` VARCHAR(45) NOT NULL,
   `exchange` VARCHAR(45) NOT NULL,
   `country` VARCHAR(45) NOT NULL,
   `currency` VARCHAR(45) NOT NULL,
   `sector` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`stocktId`),
-  UNIQUE INDEX `assetId_UNIQUE` (`stocktId` ASC) VISIBLE,
+  PRIMARY KEY (`stockId`),
+  UNIQUE INDEX `assetId_UNIQUE` (`stockId` ASC) VISIBLE,
   UNIQUE INDEX `symbol_UNIQUE` (`symbol` ASC) VISIBLE)
 ENGINE = InnoDB;
 
@@ -60,9 +60,22 @@ CREATE TABLE IF NOT EXISTS `taelab`.`watchlist` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_user_has_asset_asset1`
     FOREIGN KEY (`stockId`)
-    REFERENCES `taelab`.`stock` (`stocktId`)
+    REFERENCES `taelab`.`stock` (`stockId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `taelab`.`news`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `taelab`.`news` (
+  `newsId` INT NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(45) NOT NULL,
+  `subtitle` VARCHAR(45) NULL,
+  `content` VARCHAR(45) NULL,
+  `regdate` TIMESTAMP NULL DEFAULT now(),
+  PRIMARY KEY (`newsId`))
 ENGINE = InnoDB;
 
 
