@@ -67,16 +67,34 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `taelab`.`category`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `taelab`.`category` (
+  `categoryId` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL,
+  PRIMARY KEY (`categoryId`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `taelab`.`news`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `taelab`.`news` (
   `newsId` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(45) NOT NULL,
   `subtitle` VARCHAR(45) NULL,
-  `content` VARCHAR(45) NULL,
+  `content` TEXT NULL,
+  `categoryId` INT NOT NULL,
   `region` VARCHAR(45) NOT NULL,
+  `url` VARCHAR(100) NULL,
   `regdate` TIMESTAMP NULL DEFAULT now(),
-  PRIMARY KEY (`newsId`))
+  PRIMARY KEY (`newsId`),
+  INDEX `fk_news_category1_idx` (`categoryId` ASC) VISIBLE,
+  CONSTRAINT `fk_news_category1`
+    FOREIGN KEY (`categoryId`)
+    REFERENCES `taelab`.`category` (`categoryId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
