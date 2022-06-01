@@ -87,12 +87,20 @@ CREATE TABLE IF NOT EXISTS `taelab`.`news` (
   `categoryId` INT NOT NULL,
   `region` VARCHAR(45) NOT NULL,
   `url` VARCHAR(100) NULL,
-  `regdate` TIMESTAMP NULL DEFAULT now(),
+  `userId` VARCHAR(45) NOT NULL,
+  `regdate` TIMESTAMP NULL,
+  `coldate` TIMESTAMP NOT NULL DEFAULT now(),
   PRIMARY KEY (`newsId`),
   INDEX `fk_news_category1_idx` (`categoryId` ASC) VISIBLE,
+  INDEX `fk_news_user1_idx` (`userId` ASC) VISIBLE,
   CONSTRAINT `fk_news_category1`
     FOREIGN KEY (`categoryId`)
     REFERENCES `taelab`.`category` (`categoryId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_news_user1`
+    FOREIGN KEY (`userId`)
+    REFERENCES `taelab`.`user` (`userId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
